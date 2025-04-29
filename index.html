@@ -1,32 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TaxiFly</title>
+  <title>Taxi Premium</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <div class="app">
-    <header class="header">
-      <div class="balance">1,200 TXY</div>
-      <div class="title">TaxiFly</div>
-      <div class="profile">👤</div>
-    </header>
-
-    <main class="main">
-      <div class="map-background" id="map"></div>
-    </main>
-
-    <nav class="navbar">
-      <button>Автопарк</button>
-      <button>СТО</button>
-      <button>Ринок</button>
-      <button>Біржа</button>
-      <button class="active">Грати</button>
-    </nav>
+<div class="app">
+  <header class="header">
+    <div class="balance">Баланс: <span id="balance">1000</span> TXY</div>
+    <div class="title">Taxi Premium</div>
+    <div class="profile">👤</div>
+  </header>
+  <main class="main">
+    <section id="garage" class="page hidden">
+      <h2>🚗 Мій Автопарк</h2>
+      <div id="garage-cars"></div>
+    </section>
+    <section id="service" class="page hidden">
+      <h2>🔧 СТО</h2>
+      <div id="service-content"></div>
+    </section>
+    <section id="market" class="page active">
+      <h2>🏬 Ринок</h2>
+      <div class="filters">
+        <button onclick="filterMarket('all')">Усі авто</button>
+        <button onclick="filterMarket('cheap')">Дешеві авто</button>
+        <button onclick="filterMarket('expensive')">Елітні авто</button>
+      </div>
+      <div id="market-cars" class="market-container"></div>
+    </section>
+    <section id="exchange" class="page hidden">
+      <h2>💱 Біржа</h2>
+      <div id="exchange-content"></div>
+    </section>
+    <section id="play" class="page hidden">
+      <div class="map-background" id="map">
+        <div id="cars-container"></div>
+      </div>
+    </section>
+  </main>
+  <nav class="navbar">
+    <button data-page="garage">Автопарк</button>
+    <button data-page="service">СТО</button>
+    <button data-page="market" class="active">Ринок</button>
+    <button data-page="exchange">Біржа</button>
+    <button data-page="play">Грати</button>
+  </nav>
+</div>
+<div id="carModal" class="modal hidden">
+  <div class="modal-content">
+    <span id="closeModal" class="close">&times;</span>
+    <img id="modalCarImage" src="" alt="Фото машини" />
+    <h2 id="modalCarName"></h2>
+    <p id="modalCarDescription"></p>
+    <p id="modalCarProfit"></p>
+    <p id="modalCarReliability"></p>
+    <p id="modalCarPrice"></p>
+    <button id="modalBuyButton" class="buy-button">Купити</button>
   </div>
-
-  <script src="script.js"></script>
+</div>
 </body>
 </html>
